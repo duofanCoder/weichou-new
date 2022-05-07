@@ -46,6 +46,5 @@ public class JournalDto {
     @Enumerated(EnumType.STRING)
     private JournalType journalType;
     private String content;
-    private CampaignDetail campaignDetail;
     private Long campaignDetailId;
 }

@@ -45,8 +45,8 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
     // 新增操作
     public CampaignIntroDto save(CampaignIntroDto dto) {
         CampaignIntro model = modelMapper.map(dto, CampaignIntro.class);
-        model.setCreateTime(new Date()).setUpdateTime(new Date());
-        model.setCampaignDetail(new CampaignDetail());
+        model.setCreateTime(new Date()).setUpdateTime(new Date()).setEye(false);
+        model.setCampaignDetail(new CampaignDetail().setCreateTime(new Date()).setUpdateTime(new Date()));
         return modelMapper.map(campaignIntroRepository.save(model), CampaignIntroDto.class);
     }
 

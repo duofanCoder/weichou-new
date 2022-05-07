@@ -49,8 +49,8 @@ public class FaqServiceImpl implements FaqService {
     // 新增操作
     public FaqDto save(FaqDto dto) {
         Faq model = faqMapper.toFaqModel(dto);
-        model.setCreateTime(new Date()).setUpdateTime(new Date()).setId(-1L);
-        return modelMapper.map(faqRepository.save(model), FaqDto.class);
+        model.setCreateTime(new Date()).setUpdateTime(new Date());
+        return faqMapper.toFaqDto(faqRepository.save(model));
     }
 
     @Override

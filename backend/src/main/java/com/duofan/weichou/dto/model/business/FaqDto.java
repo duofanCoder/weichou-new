@@ -42,6 +42,5 @@ public class FaqDto {
     private String  question;
     private String  answer;
 
-    private CampaignDetail campaignDetail;
     private Long campaignDetailId;
 }

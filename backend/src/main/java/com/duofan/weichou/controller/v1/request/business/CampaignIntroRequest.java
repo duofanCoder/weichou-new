@@ -41,4 +41,5 @@ public class CampaignIntroRequest {
     private Double currentMoney;
     private boolean isEye;
     private Date endTime;
+    private Long categoryId;
 }

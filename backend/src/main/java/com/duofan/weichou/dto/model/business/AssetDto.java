@@ -35,9 +35,6 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AssetDto {
     private Long id;
-    private String name;
-    private String description;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date createTime;
@@ -48,6 +45,5 @@ public class AssetDto {
     private String url;
     @JsonEnumDefaultValue
     private AssetType assetType;
-    private CampaignDetail campaignDetail;
     private Long campaignDetailId;
 }

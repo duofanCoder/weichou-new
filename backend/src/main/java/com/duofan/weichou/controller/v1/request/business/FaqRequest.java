@@ -1,6 +1,7 @@
 package com.duofan.weichou.controller.v1.request;
 
 
+import com.duofan.weichou.model.business.CampaignDetail;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.duofan.weichou.model.business.Faq;
 import lombok.Getter;
@@ -28,4 +29,8 @@ public class FaqRequest {
     private String name;
     @NotNull(message = "{constraints.NotEmpty.message}")
     private String description;
+    private String  question;
+    private String  answer;
+    private Long campaignDetailId;
+
 }

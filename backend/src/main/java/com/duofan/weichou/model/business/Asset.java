@@ -34,7 +34,7 @@ public class Asset {
     private String url;
     @Enumerated(EnumType.STRING)
     private AssetType assetType;
-    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = CampaignDetail.class)
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
 }

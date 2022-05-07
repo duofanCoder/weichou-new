@@ -35,7 +35,8 @@ public class Perk {
     private String description;
     private int price;
     private String posterImg;
-    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
+//    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = CampaignDetail.class)
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
     private int orderNum;

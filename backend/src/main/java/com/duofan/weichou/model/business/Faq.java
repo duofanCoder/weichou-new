@@ -34,7 +34,7 @@ public class Faq {
 
     private String  question;
     private String  answer;
-    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = CampaignDetail.class)
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
 

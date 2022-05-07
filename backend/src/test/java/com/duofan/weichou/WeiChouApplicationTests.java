@@ -45,14 +45,6 @@ public class WeiChouApplicationTests {
         System.out.println(campaignIntroService.save(campaignIntroDto));
     }
 
-    //    测试detail
-    //    mapperby 属性是否可以被动维护asset、faq、journal
-    @Test
-    public void InsertCampaignDetail() {
-        CampaignDetailDto campaignDetailDto = new CampaignDetailDto()
-                .setCampaignIntro(new CampaignIntroDto().setId(2L));
-        System.out.println(campaignDetailService.save(campaignDetailDto));
-    }
 
     @Test
     @Transactional
@@ -74,31 +66,31 @@ public class WeiChouApplicationTests {
 
     @Test
     public void insertCampaignAdd() {
-        CampaignDetailDto byPrimaryKey1 = campaignDetailService.getByPrimaryKey(2L);
-        if (byPrimaryKey1 == null) {
-            byPrimaryKey1 = new CampaignDetailDto().setUpdateTime(new Date()).setCreateTime(new Date());
-        } else {
-            LinkedList<AssetDto> assetList = new LinkedList<>();
-            LinkedList<PerkDto> perkList = new LinkedList<>();
-            LinkedList<FaqDto> faqList = new LinkedList<>();
+        CampaignDetailDto byPrimaryKey1 = campaignDetailService.getByPrimaryKey(1L);
+        LinkedList<AssetDto> assetList = new LinkedList<>();
+        LinkedList<PerkDto> perkList = new LinkedList<>();
+        LinkedList<FaqDto> faqList = new LinkedList<>();
+        assetList.add(new AssetDto().setAssetType(AssetType.IMAGE)
+                .setUrl("这是地址").setCampaignDetailId(1L));
+        assetList.add(new AssetDto().setAssetType(AssetType.IMAGE)
+                .setUrl("这是地址2").setCampaignDetailId(1L));
+        assetList.add(new AssetDto().setAssetType(AssetType.VIDEO)
+                .setUrl("这是地址3").setCampaignDetailId(1L));
+        faqList.add(new FaqDto().setAnswer("回答1").setQuestion("问题1").setCampaignDetailId(1L));
+        faqList.add(new FaqDto().setAnswer("回答2").setQuestion("问题2").setCampaignDetailId(1L));
+        faqList.add(new FaqDto().setAnswer("回答3").setQuestion("问题3").setCampaignDetailId(1L));
 
-            assetList.add(new AssetDto().setAssetType(AssetType.IMAGE)
-                    .setUrl("这是地址").setCampaignDetailId(2L));
-            assetList.add(new AssetDto().setAssetType(AssetType.IMAGE)
-                    .setUrl("这是地址2").setCampaignDetailId(2L));
-            assetList.add(new AssetDto().setAssetType(AssetType.VIDEO)
-                    .setUrl("这是地址3").setCampaignDetailId(2L));
-            faqList.add(new FaqDto().setAnswer("回答1").setQuestion("问题1").setCampaignDetailId(2L));
-            faqList.add(new FaqDto().setAnswer("回答2").setQuestion("问题2").setCampaignDetailId(2L));
-            faqList.add(new FaqDto().setAnswer("回答3").setQuestion("问题3").setCampaignDetailId(2L));
-
-            byPrimaryKey1.setAssetList(assetList).setFaqList(faqList);
+        for (FaqDto faqDto : faqList) {
+            System.out.println(faqService.save(faqDto));
         }
-        System.out.println(campaignDetailService.save(byPrimaryKey1));
+        for (AssetDto assetDto : assetList) {
+            System.out.println(assetService.save(assetDto));
+        }
     }
 
     @Test
     public void contextLoads() {
+        InsertCampaignIntro();
         insertCampaignAdd();
     }
 

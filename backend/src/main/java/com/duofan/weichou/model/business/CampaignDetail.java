@@ -21,7 +21,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Accessors(chain = true)
 @Entity
@@ -33,17 +32,16 @@ public class CampaignDetail {
     private Date createTime;
     private Date updateTime;
 
-
     @OneToMany(targetEntity = Asset.class)
-    @JoinColumn(name = "campaign_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private List<Asset> assetList;
     @OneToMany(targetEntity = Faq.class)
-    @JoinColumn(name = "campaign_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private List<Faq> faqList;
     @OneToMany(targetEntity = Perk.class)
-    @JoinColumn(name = "campaign_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private List<Perk> perkList;
     @OneToMany(targetEntity = Journal.class)
-    @JoinColumn(name = "campaign_detail_id", referencedColumnName = "id")
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private List<Journal> journalList;
 }

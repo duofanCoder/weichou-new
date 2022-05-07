@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/faq")
 @Api(value = "application")
 public class FaqController {
-
     @Autowired
     private FaqService faqService;
     @Autowired

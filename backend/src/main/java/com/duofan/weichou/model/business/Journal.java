@@ -38,7 +38,8 @@ public class Journal {
     private JournalType journalType;
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
-    @JoinColumn(name = "detail_id", referencedColumnName = "id")
+//    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
+@ManyToOne(targetEntity = CampaignDetail.class)
+@JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
 }

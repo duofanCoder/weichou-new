@@ -30,6 +30,5 @@ public class AssetRequest {
     private String url;
     @JsonEnumDefaultValue
     private AssetType assetType;
-    private CampaignDetail campaignDetail;
     private Long campaignDetailId;
 }
