@@ -1,0 +1,30 @@
+frontend/node_modules
+frontend/.DS_Store
+frontend/dist
+frontend/dist-ssr
+frontend/*.local
+frontend/.idea
+frontend/.vscode
+
+backend/HELP.md
+backend//target/
+backend/!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+### IntelliJ IDEA ###
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+
+
+### Database ###
+backend/db/*

@@ -1,0 +1,37 @@
+{
+  "name": "audiobook-system",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@iconify/vue": "^3.1.3",
+    "@vueuse/core": "^7.5.5",
+    "axios": "^0.26.1",
+    "md-editor-v3": "^1.9.2",
+    "crypto-js": "^4.1.1",
+    "form-data": "^4.0.0",
+    "pinia": "^2.0.11",
+    "qs": "^6.10.3",
+    "vite-plugin-pages": "^0.20.2",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.0.34",
+    "@types/node": "^17.0.15",
+    "@types/qs": "^6.9.7",
+    "@vitejs/plugin-vue": "^2.0.0",
+    "naive-ui": "^2.25.1",
+    "typescript": "^4.4.4",
+    "unplugin-auto-import": "^0.5.11",
+    "unplugin-icons": "^0.13.0",
+    "unplugin-vue-components": "^0.17.17",
+    "vite": "^2.7.2",
+    "vite-plugin-windicss": "^1.6.3",
+    "vue-tsc": "^0.29.8",
+    "windicss": "^3.4.3"
+  }
+}
