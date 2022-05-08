@@ -72,6 +72,7 @@ export declare namespace Dto {
     supportCount: number;
     campaignDetailId: number;
     isEye: boolean;
+    createTime: Date;
   }
 
   interface Asset {
@@ -93,6 +94,7 @@ export declare namespace Dto {
     journalType: JournalType;
     content: string;
     campaignDetailId: number;
+    posterImg: string;
   }
 
   interface Faq {

@@ -50,13 +50,13 @@ public class JournalServiceImpl implements JournalService {
     // 新增操作
     public JournalDto save(JournalDto dto) {
         Journal model = journalMapper.toJournalModel(dto);
-        model.setCreateTime(new Date()).setUpdateTime(new Date()).setId(-1L);
+        model.setCreateTime(new Date()).setUpdateTime(new Date());
         return modelMapper.map(journalRepository.save(model), JournalDto.class);
     }
 
     @Override
     public JournalDto getByPrimaryKey(Long primaryKey) {
-        return modelMapper.map(journalRepository.findById(primaryKey), JournalDto.class);
+        return modelMapper.map(journalRepository.findById(primaryKey).get(), JournalDto.class);
     }
 
     @Override

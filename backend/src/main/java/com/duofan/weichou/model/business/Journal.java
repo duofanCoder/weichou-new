@@ -37,6 +37,7 @@ public class Journal {
     @Enumerated(EnumType.STRING)
     private JournalType journalType;
     private String content;
+    private String posterImg;
 
 //    @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.LAZY)
 @ManyToOne(targetEntity = CampaignDetail.class)

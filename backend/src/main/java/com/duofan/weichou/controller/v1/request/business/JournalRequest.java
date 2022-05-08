@@ -34,4 +34,5 @@ public class JournalRequest {
     private JournalType journalType;
     private String content;
     private Long campaignDetailId;
+    private String posterImg;
 }

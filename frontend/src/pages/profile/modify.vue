@@ -27,11 +27,11 @@
           placeholder="请输入"
         />
         <n-input
-            :class="[type == 'bilibili' ? '' : 'hidden']"
-            type="text"
-            size="large"
-            v-model:value="userInfoModel.bilibili"
-            placeholder="请输入"
+          :class="[type == 'bilibili' ? '' : 'hidden']"
+          type="text"
+          size="large"
+          v-model:value="userInfoModel.bilibili"
+          placeholder="请输入"
         />
         <n-input
           :class="[type == 'mobileNumber' ? '' : 'hidden']"

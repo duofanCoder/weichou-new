@@ -1,7 +1,7 @@
 import { Dto } from '@/model';
 import { request } from '../request';
 
-export function fetchQueryJournal(condition: Partial<Condition.Common>) {
+export function fetchQueryJournal(condition: Partial<Condition.Journal>) {
   return request.post<Dto.Page<Dto.Journal>>('/journal/query', condition);
 }
 
@@ -20,4 +20,8 @@ export function fetchSaveJournal(journal: Partial<Dto.Journal>) {
 
 export function fetchUpdateJournal(journal: Partial<Dto.Journal>) {
   return request.post('/journal/update', journal);
+}
+
+export function fetchGetJournal(id: number) {
+  return request.post<Dto.Journal>(`/journal/${id}`);
 }

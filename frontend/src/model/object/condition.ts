@@ -1,3 +1,5 @@
+import { JournalType } from '../enum';
+
 declare namespace Condition {
   interface Common {
     name: string;
@@ -19,5 +21,12 @@ declare namespace Condition {
     categoryId: number;
     pageSize: number;
     pageNum: number;
+  }
+
+  interface Journal {
+    pageSize: number;
+    pageNum: number;
+    jorunalType: JournalType;
+    campaignId: number;
   }
 }

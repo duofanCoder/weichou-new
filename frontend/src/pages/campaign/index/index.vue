@@ -17,7 +17,7 @@
           <FAQ :faqList="campaignDetail?.faqList" />
         </n-tab-pane>
         <n-tab-pane name="动态" tab="动态" class="space-y-3">
-          <Journal :id="2" />
+          <Journal :journalList="campaignDetail?.journalList" />
         </n-tab-pane>
         <!-- <n-tab-pane name="讨论" tab="讨论">
           <CommentList :id="2" />

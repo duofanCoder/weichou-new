@@ -32,10 +32,10 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CampaignIntroDto {
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     @Temporal(TemporalType.DATE)
     private Date createTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     @Temporal(TemporalType.DATE)
     private Date updateTime;
     private boolean isEye;

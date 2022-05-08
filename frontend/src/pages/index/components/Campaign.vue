@@ -24,7 +24,9 @@
   const campaignListRef = ref<Array<Dto.CampaignIntro>>([]);
 
   fetchQueryCampaignIntro({ pageSize: 6 }).then((res) => {
-    campaignListRef.value = res.data.data;
+    if (res.data != null) {
+      campaignListRef.value = res.data.data;
+    }
   });
 </script>
 <style scoped></style>
