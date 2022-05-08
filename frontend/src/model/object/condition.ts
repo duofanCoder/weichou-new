@@ -12,4 +12,12 @@ declare namespace Condition {
     positionId: number;
     departmentId: number;
   }
+
+  interface Campaign {
+    title: string;
+    isFinish: boolean;
+    categoryId: number;
+    pageSize: number;
+    pageNum: number;
+  }
 }

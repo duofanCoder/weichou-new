@@ -14,7 +14,11 @@
   import { fetchFileUpload, fetchRemoveAsset, fetchSaveAsset } from '@/service';
   import { UploadCustomRequestOptions, UploadFileInfo } from 'naive-ui/lib/upload';
   import { ref } from 'vue';
-
+  const props = defineProps({
+    campaignDetailId: {
+      type: Number,
+    },
+  });
   const showModalRef = ref(false);
   const previewFileList = ref<UploadFileInfo[]>([]);
   const fileList = ref<UploadFileInfo[]>([]);
@@ -42,7 +46,7 @@
         const d: Partial<Dto.Asset> = {
           url: item.fullFilePath,
           assetType: AssetType.IMAGE,
-          campaignDetailId: 1,
+          campaignDetailId: props.campaignDetailId,
         };
         fetchSaveAsset(d).then((res) => {
           if (res.data != null) {

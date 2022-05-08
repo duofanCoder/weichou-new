@@ -8,43 +8,32 @@
       <p class="text-2xl px-6">您发起的活动</p>
       <p class="px-6 tracking-widest mb-4">活动可不是简简单单的发起就会成功的。</p>
 
-      <template v-for="item in myCompaigns" :key="item.id">
-        <div
-          @contextmenu="handleContextMenu($event, item.id)"
-          class="flex text-base rounded-lg mx-6 border-b hover:(bg-true-gray-100 cursor-pointer )"
-        >
-          <div>
-            <img v-if="item.cardImage" :src="item.cardImage" alt="" />
-            <img
-              v-else
-              src="@/assets/material/ipad.jpg"
-              class="w-60 h-40 object-cover rounded-lg"
-              alt=""
+      <div
+        v-for="item in meCampaignIntroList"
+        :key="item.id"
+        @click="router.push({ name: 'campaign-index', query: { campaignId: item.id } })"
+        class="flex text-base rounded-lg mx-6 border-b hover:(bg-true-gray-100 cursor-pointer )"
+      >
+        <img :src="item.posterImg" class="my-auto w-60 h-160px object-cover rounded-lg" alt="" />
+        <div class="inline-flex flex-col flex-1 ml-3 pt-2 py-2">
+          <p class="text-xl">{{ item.title }}</p>
+          <p class="text-base text-gray-500 mt-2"> {{ item.description }} </p>
+          <div class="mt-auto mb-2 inline-flex space-x-3">
+            <n-tag v-if="new Date(item.endTime) > new Date()" type="success"> 进行中 </n-tag>
+            <n-tag v-else> 已结束 </n-tag>
+            <n-time
+              :time="new Date(item.endTime)"
+              class="self-center"
+              format="yyyy年M月d日h时m分"
             />
-          </div>
-          <div class="inline-flex flex-col flex-1 ml-3 pt-2">
-            <p class="text-xl">{{ item.title }}</p>
-            <p class="text-base text-gray-500 mt-2">
-              {{ item.description }}
-            </p>
-            <div class="mt-auto mb-2 space-x-3">
-              <n-tag type="info"> {{ CampaignState[item.state] }} </n-tag>
-              <n-time :time="4444221122122" format="yyyy年M月d日h时m分" />
-            </div>
+            <i-mdi-cards-heart-outline
+              v-if="false"
+              class="self-center text-gray-400 cursor-pointer hover:(text-pink-600)"
+            />
+            <i-mdi-cards-heart v-else class="self-center text-pink-600 cursor-pointer" />
           </div>
         </div>
-      </template>
-
-      <n-dropdown
-        placement="bottom-start"
-        trigger="manual"
-        :x="xRef"
-        :y="yRef"
-        :options="options"
-        :show="showDropdownRef"
-        :on-clickoutside="onClickoutside"
-        @select="handleSelect"
-      />
+      </div>
     </div>
 
     <div class="border py-5 mt-6 rounded-xl bg-white space-y-3">
@@ -78,11 +67,6 @@
       </div>
 
       <div class="flex text-base rounded-lg mx-6 border-b hover:(bg-true-gray-100 cursor-pointer )">
-        <!-- <div class="inline-flex self-center text-gray-500 w-50">照片</div> -->
-        <!-- <div class="inline-flex self-center align-middle">更改照片可帮助您个性化您的账号</div> -->
-        <!-- <div class="ml-auto items-center inline-flex"> -->
-        <!-- <n-avatar :size="56" round src="/src/assets/material/avatar.png"> </n-avatar> -->
-        <!-- </div> -->
         <div>
           <img src="@/assets/material/ipad.jpg" class="w-60 h-40 object-cover rounded-lg" alt="" />
         </div>
@@ -102,53 +86,19 @@
 </template>
 
 <script setup lang="ts">
-  import { useUserStore } from '@/store';
-  import { ref, nextTick, unref, computed } from 'vue';
-  import { Love } from '@/components';
-  import { CampaignState } from '@/enum';
-  import { getCampaignStateVal } from '@/enum';
+  import { Dto } from '@/model';
+  import { fetchGetMeCampaignIntro } from '@/service';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
 
-  //  我的活动区域菜单功能 start
-  const xRef = ref(0);
-  const yRef = ref(0);
-  const showDropdownRef = ref();
+  const meCampaignIntroList = ref<Array<Dto.CampaignIntro>>();
+  fetchGetMeCampaignIntro().then((res) => {
+    if (res.data != null) {
+      meCampaignIntroList.value = res.data;
+    }
+  });
 
-  const options = [
-    {
-      label: '编辑活动',
-      key: 'edit',
-    },
-    {
-      label: '删除活动',
-      key: 'delete',
-    },
-  ];
-
-  const handleContextMenu = (e: MouseEvent, id: number) => {
-    e.preventDefault();
-    showDropdownRef.value = false;
-    nextTick().then(() => {
-      showDropdownRef.value = true;
-      xRef.value = e.clientX;
-      yRef.value = e.clientY;
-    });
-  };
-
-  const handleSelect = (key: string | number) => {
-    showDropdownRef.value = false;
-  };
-
-  const onClickoutside = () => {
-    showDropdownRef.value = false;
-  };
-
-  //  我的活动区域菜单功能 end
-  const userStore = useUserStore();
-  const myCompaigns = unref(userStore.getMyCompaigns);
-  const loveCompaigns = unref(userStore.getLoveCompaigns);
-
-  myCompaigns.forEach((c) => console.log(c));
-  loveCompaigns.forEach((c) => console.log(c));
+  const router = useRouter();
 </script>
 
 <style scoped></style>

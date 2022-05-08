@@ -1,6 +1,7 @@
 package com.duofan.weichou.dto.model.business;
 
 
+import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.model.business.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -56,4 +57,9 @@ public class CampaignDetailDto {
     private Long[] journalIds;
     private CampaignIntroDto campaignIntro;
     private Long campaignIntroId;
+
+    private UserDto owner;
+
+    private JournalDto story;
+    private int supportCount;
 }

@@ -30,7 +30,5 @@ public class PerkRequest {
     private int price;
     private String posterImg;
     private int orderNum;
-
-    private CampaignDetail campaignDetail;
     private Long campaignDetailId;
 }

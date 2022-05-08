@@ -38,7 +38,7 @@ public class WeiChouApplicationTests {
         CampaignIntroDto campaignIntroDto = new CampaignIntroDto()
                 .setTitle("Sneapon Unisex Comfortable Sandals")
                 .setDescription("A fusion of traditional Japanese geta sandals and modern sneakers.")
-                .setCategory(new Category().setId(2L))
+                .setCategory(new CategoryDto().setId(2L))
                 .setEndTime(DateUtil.parse("2030-01-01"))
                 .setPosterImg("http://localhost:8080/file/img/20220506233531626.jpg")
                 .setLocation("中国 南京");
@@ -49,8 +49,9 @@ public class WeiChouApplicationTests {
     @Test
     @Transactional
     public void selectCampaign() {
-        CampaignIntroDto byPrimaryKey = campaignIntroService.getByPrimaryKey(2L);
-        CampaignDetailDto byPrimaryKey1 = campaignDetailService.getByPrimaryKey(2L);
+        CampaignIntroDto byPrimaryKey = campaignIntroService.getByPrimaryKey(6L);
+        CampaignDetailDto byPrimaryKey1 = campaignDetailService.getByPrimaryKey(byPrimaryKey.getCampaignDetailId());
+        System.out.println(byPrimaryKey);
     }
 
 

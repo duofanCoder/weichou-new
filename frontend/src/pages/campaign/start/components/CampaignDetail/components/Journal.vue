@@ -24,10 +24,19 @@
     'fullscreen',
     'preview',
   ];
+
+  const { campaignDetailId } = defineProps({
+    campaignDetailId: {
+      type: Number,
+    },
+  });
   const journalRef = ref<Partial<Dto.Journal>>({
     content: '',
-    campaignDetailId: 1,
+    campaignDetailId: campaignDetailId,
     journalType: JournalType.STORY,
+  });
+  defineExpose({
+    journalRef,
   });
   const onUploadImg = async (files: Array<File>, callback: (urls: string[]) => void) => {
     const res = await Promise.all(

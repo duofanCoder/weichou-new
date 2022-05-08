@@ -48,4 +48,6 @@ public class UserDto {
     private String wechat;
     private String mobile;
     private UserRole role;
+
+    private int campaignCount;
 }

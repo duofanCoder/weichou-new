@@ -70,6 +70,8 @@ export declare namespace Dto {
     category: Category;
     endTime: Date;
     supportCount: number;
+    campaignDetailId: number;
+    isEye: boolean;
   }
 
   interface Asset {
@@ -136,7 +138,20 @@ export declare namespace Dto {
     title: string;
     price: number;
     description: string;
-    perkImg: string;
+    posterImg: string;
     campaignDetailId: number;
+  }
+
+  interface CampaignCard {
+    id: number;
+    cardImg: string;
+    title: string;
+    description: string;
+    raisedMoney: number;
+    goalRaisedMoney: number;
+    categaryName: string;
+    deadline: Date;
+    isAttention: boolean;
+    isInProgress: boolean;
   }
 }

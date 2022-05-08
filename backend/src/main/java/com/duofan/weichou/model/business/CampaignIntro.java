@@ -1,5 +1,6 @@
 package com.duofan.weichou.model.business;
 
+import com.duofan.weichou.model.common.User;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -31,13 +32,19 @@ public class CampaignIntro {
     private String title;
     private String description;
     private String location;
-    @ManyToOne(targetEntity = Category.class)
+    @ToString.Exclude
+    @ManyToOne(targetEntity = Category.class,cascade = CascadeType.REFRESH)
     private Category category;
     private boolean isEye;
     private Double totalMoney;
     private Double currentMoney;
     private Date endTime;
+    @ToString.Exclude
     @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
+
+    @ToString.Exclude
+    @ManyToOne(targetEntity = User.class)
+    private User  owner;
 }

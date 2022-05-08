@@ -12,10 +12,7 @@ import io.swagger.annotations.Authorization;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author duofan
@@ -61,5 +58,14 @@ public class CampaignDetailController {
     public Response save(@RequestBody CampaignDetailCondition condition) {
         return Response.ok().setData(campaignDetailService.findPageByCondition(condition));
     }
+
+
+    @PostMapping("{id}")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response get(@PathVariable("id") Long id) {
+        return Response.ok().setData(campaignDetailService.getDetail(id));
+    }
+
+
 
 }

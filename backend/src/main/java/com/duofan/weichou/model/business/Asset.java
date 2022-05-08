@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author duofan
@@ -33,6 +32,7 @@ public class Asset {
     private Date updateTime;
     private String url;
     @Enumerated(EnumType.STRING)
+    @OrderBy
     private AssetType assetType;
     @ManyToOne(targetEntity = CampaignDetail.class)
     @JoinColumn(name = "detail_id", referencedColumnName = "id")

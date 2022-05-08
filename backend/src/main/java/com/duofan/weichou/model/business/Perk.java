@@ -40,4 +40,11 @@ public class Perk {
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail campaignDetail;
     private int orderNum;
+
+
+    @OneToMany(targetEntity = PayOrder.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "perk_id", referencedColumnName = "id")
+    private List<PayOrder> payOrderList;
+
+
 }

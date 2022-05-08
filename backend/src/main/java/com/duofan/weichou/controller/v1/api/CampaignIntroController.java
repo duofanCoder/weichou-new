@@ -61,5 +61,9 @@ public class CampaignIntroController {
     public Response save(@RequestBody CampaignIntroCondition condition) {
         return Response.ok().setData(campaignIntroService.findPageByCondition(condition));
     }
-
+    @PostMapping("me")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response get() {
+        return Response.ok().setData(campaignIntroService.getCurrentUserCampaignIntro());
+    }
 }

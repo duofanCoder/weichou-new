@@ -20,12 +20,16 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CampaignIntroCondition extends BaseCondition {
-    private String name;
-
-    public String getName() {
-        if (this.name == null) {
+    private String title;
+    private Boolean isFinish;
+    private long categoryId;
+    public String getTitle() {
+        if (this.title == null) {
             return "";
         }
-        return this.name;
+        return this.title;
     }
+
+
+
 }

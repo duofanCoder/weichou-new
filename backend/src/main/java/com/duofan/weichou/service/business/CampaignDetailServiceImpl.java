@@ -11,6 +11,7 @@ import com.duofan.weichou.model.business.Perk;
 import com.duofan.weichou.repository.business.CampaignDetailRepository;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.javafx.geom.PickRay;
+import org.aspectj.weaver.ast.Var;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -112,4 +113,15 @@ public class CampaignDetailServiceImpl implements CampaignDetailService {
         return modelMapper.map(campaignDetailRepository.save(model), CampaignDetailDto.class);
     }
 
+    // 通过introId获取detail信息
+    @Override
+    public CampaignDetailDto getDetail(Long id) {
+        CampaignIntroDto introDto = campaignIntroService.getByPrimaryKey(id);
+        CampaignDetail campaignDetail = campaignDetailRepository.findById(introDto.getCampaignDetailId()).get();
+        CampaignDetailDto campaignDetailDto = campaignDetailMapper.toCampaignDetailDto(campaignDetail)
+                .setSupportCount(campaignDetail.getPayOrderList().size())
+                .setCampaignIntro(introDto.setSupportCount(campaignDetail.getPayOrderList().size()))
+                .setStory(modelMapper.map(campaignDetail.getJournalList().get(0),JournalDto.class));
+        return  campaignDetailDto;
+    }
 }

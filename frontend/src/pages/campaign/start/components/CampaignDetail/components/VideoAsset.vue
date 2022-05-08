@@ -1,11 +1,11 @@
 <template>
   <div class="w-full">
-    <div v-for="(item, index) in viedoAssetList" :key="index" class="py-4 flex gap-4">
+    <div v-for="(item, index) in videoAssetList" :key="index" class="py-4 flex gap-4">
       <div class="flex flex-col w-full gap-4">
-        <n-input type="text" v-model:value="viedoAssetList[index].url" />
+        <n-input type="text" v-model:value="videoAssetList[index].url" />
       </div>
       <div>
-        <n-button @click="removeViedoAsset(viedoAssetList[index])">删除</n-button>
+        <n-button @click="removeViedoAsset(videoAssetList[index])">删除</n-button>
       </div>
     </div>
     <div
@@ -22,20 +22,27 @@
   import { fetchRemoveAsset } from '@/service';
   import { ref } from 'vue';
   import { AssetType } from '@/model';
-  const viedoAssetList = ref<Array<Partial<Dto.Asset>>>(Array(0));
+  const videoAssetList = ref<Array<Partial<Dto.Asset>>>(Array(0));
+  const { campaignDetailId } = defineProps({
+    campaignDetailId: {
+      type: Number,
+    },
+  });
+  defineExpose({
+    videoAssetList,
+  });
   const addItem = () => {
-    viedoAssetList.value.push({
+    videoAssetList.value.push({
       url: '',
       assetType: AssetType.VIDEO,
-      campaignDetailId: 1,
+      campaignDetailId: campaignDetailId,
     });
   };
-
   const removeViedoAsset = (faq: Partial<Dto.Asset>) => {
     if (faq.id != undefined) {
       fetchRemoveAsset([faq.id]);
     }
-    viedoAssetList.value = viedoAssetList.value.filter((obj) => obj !== faq);
+    videoAssetList.value = videoAssetList.value.filter((obj) => obj !== faq);
   };
 </script>
 

@@ -1,5 +1,7 @@
 package com.duofan.weichou.model.common;
 
+import com.duofan.weichou.model.business.CampaignIntro;
+import com.duofan.weichou.model.business.PayOrder;
 import com.duofan.weichou.model.enums.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Arpit Khandelwal.
@@ -42,4 +45,14 @@ public class User {
     private String mobile;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(targetEntity = CampaignIntro.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private List<CampaignIntro> campaignIntroList;
+
+    @OneToMany(targetEntity = PayOrder.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private List<PayOrder> payOrderList;
+
+
 }

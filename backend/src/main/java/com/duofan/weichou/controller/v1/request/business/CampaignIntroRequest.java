@@ -36,10 +36,10 @@ public class CampaignIntroRequest {
     private String title;
     private String description;
     private String location;
-    private Category category;
     private Double totalMoney;
     private Double currentMoney;
     private boolean isEye;
     private Date endTime;
     private Long categoryId;
+    private Long CampaignDetailId;
 }

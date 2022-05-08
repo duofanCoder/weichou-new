@@ -5,10 +5,13 @@
       >微筹是很年轻的平台，让你发现更多生动、有趣、富有想象力技术、产品，让你们所支持的产品能够走进你的生活。</div
     >
     <div class="space-x-6 my-3">
-      <n-button type="primary" class="w-24 tracking-widest">登录</n-button
+      <n-button v-if="!useUserStore().isLogin" type="primary" class="w-24 tracking-widest"
+        >登录</n-button
       ><n-button class="w-24 tracking-widest">了解更多 </n-button></div
     >
   </n-space>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { useUserStore } from '@/store';
+</script>
 <style scoped></style>

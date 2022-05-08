@@ -27,10 +27,6 @@
       type: Number,
       default: 0,
     },
-    detail: {
-      type: Boolean,
-      default: false,
-    },
   });
 </script>
 <style scoped></style>

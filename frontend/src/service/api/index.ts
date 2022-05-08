@@ -6,3 +6,5 @@ export * from './campaignIntro';
 export * from './faq';
 export * from './asset';
 export * from './journal';
+export * from './perk';
+export * from './campaignDetail';

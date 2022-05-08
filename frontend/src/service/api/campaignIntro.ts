@@ -1,6 +1,7 @@
+import { Dto } from '@/model';
 import { request } from '../request';
 
-export function fetchQueryCampaignIntro(condition: Partial<Condition.Common>) {
+export function fetchQueryCampaignIntro(condition: Partial<Condition.Campaign>) {
   return request.post<Dto.Page<Dto.CampaignIntro>>('/campaignIntro/query', condition);
 }
 
@@ -19,4 +20,8 @@ export function fetchSaveCampaignIntro(campaignIntro: Partial<Dto.CampaignIntro>
 
 export function fetchUpdateCampaignIntro(campaignIntro: Partial<Dto.CampaignIntro>) {
   return request.post('/campaignIntro/update', campaignIntro);
+}
+
+export function fetchGetMeCampaignIntro() {
+  return request.post('/campaignIntro/me');
 }

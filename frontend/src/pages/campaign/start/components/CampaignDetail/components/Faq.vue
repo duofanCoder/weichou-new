@@ -23,12 +23,19 @@
   import { fetchRemoveFaq } from '@/service';
   import { ref } from 'vue';
   const faqList = ref<Array<Partial<Dto.Faq>>>(Array(0));
-
+  defineExpose({
+    faqList,
+  });
+  const { campaignDetailId } = defineProps({
+    campaignDetailId: {
+      type: Number,
+    },
+  });
   const addItem = () => {
     faqList.value.push({
       question: '',
       answer: '',
-      campaignDetailId: 1,
+      campaignDetailId: campaignDetailId,
     });
   };
 

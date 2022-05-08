@@ -24,4 +24,6 @@ public interface CampaignDetailService {
     PageDto<CampaignDetailDto> findPageByCondition(CampaignDetailCondition condition);
 
     CampaignDetailDto update(CampaignDetailDto dto);
+
+    CampaignDetailDto getDetail(Long id);
 }

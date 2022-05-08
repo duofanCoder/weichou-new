@@ -1,6 +1,7 @@
 package com.duofan.weichou.dto.model.business;
 
 
+import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.model.business.Category;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -42,10 +43,13 @@ public class CampaignIntroDto {
     private String posterImg;
     private String title;
     private String location;
-    private Category category;
+    private CategoryDto category;
     private Double totalMoney;
     private Double currentMoney;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    @Temporal(TemporalType.DATE)
     private Date endTime;
-//    private CampaignDetailDto campaignDetail;
     private Long campaignDetailId;
+    private UserDto owner;
+    private int supportCount;
 }

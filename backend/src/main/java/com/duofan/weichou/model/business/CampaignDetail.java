@@ -44,4 +44,8 @@ public class CampaignDetail {
     @OneToMany(targetEntity = Journal.class)
     @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private List<Journal> journalList;
+
+    @OneToMany(targetEntity = PayOrder.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
+    private List<PayOrder> payOrderList;
 }
