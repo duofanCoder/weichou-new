@@ -20,22 +20,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in payOrderList" :key="item.id">
+          <tr>
             <td>
-              <n-time :time="new Date(item.createTime)" format="yy年M月d日 hh时mm分" />
+              <n-time :time="4444221122122" format="yyyy年M月d日" />
             </td>
-            <td
-              @click="
-                router.push({
-                  name: 'campaign-index',
-                  query: { campaignId: item.campaignIntro.id },
-                })
-              "
-              class="hover:( underline underline-offset-2 cursor-pointer)"
-            >
-              {{ item.campaignIntro.title }}
-            </td>
-            <td>￥ {{ item.perk.price }}</td>
+            <td class="hover:( underline underline-offset-2 cursor-pointer)">无敌陆游器-海盐版</td>
+            <td>￥ 99999</td>
+
             <td>
               <n-switch v-model:value="active" size="large">
                 <template #checked>
@@ -54,20 +45,8 @@
 </template>
 
 <script setup lang="ts">
-  import { Dto } from '@/model';
-  import { fetchQueryPayOrder } from '@/service/api/payOrder';
   import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
   const active = ref(false);
-
-  const payOrderList = ref<Array<Dto.PayOrder>>();
-  const router = useRouter();
-
-  fetchQueryPayOrder({ pageSize: 999 }).then((res) => {
-    if (res.data != null) {
-      payOrderList.value = res.data.data;
-    }
-  });
 </script>
 
 <style scoped></style>

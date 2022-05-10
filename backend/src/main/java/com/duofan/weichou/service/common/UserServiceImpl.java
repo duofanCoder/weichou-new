@@ -68,7 +68,8 @@ public class UserServiceImpl implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = findUserByUsername(auth.getName());
         modelMapper.map(profileRequest, userDto);
-        return userMapper.toDto(userRepository.save(userMapper.toModel(userDto)));
+        User user = userMapper.toModel(userDto);
+        return userMapper.toDto(userRepository.save(user));
     }
 
     /**

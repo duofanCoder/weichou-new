@@ -29,4 +29,12 @@ declare namespace Condition {
     jorunalType: JournalType;
     campaignId: number;
   }
+
+  interface PayOrder {
+    pageSize: number;
+    pageNum: number;
+    ownerId: number;
+    detailId: number;
+    perkId: number;
+  }
 }

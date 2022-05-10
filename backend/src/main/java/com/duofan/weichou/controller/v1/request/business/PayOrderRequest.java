@@ -2,7 +2,6 @@ package com.duofan.weichou.controller.v1.request;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.duofan.weichou.model.business.PayOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,4 +27,8 @@ public class PayOrderRequest {
     private String name;
     @NotNull(message = "{constraints.NotEmpty.message}")
     private String description;
+
+    private Long perkId;
+    private  Long campaignDetailId;
+
 }

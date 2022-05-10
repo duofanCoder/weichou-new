@@ -89,12 +89,14 @@ export declare namespace Dto {
 
   interface Journal {
     id: number;
+    createTime: Date;
     title: string;
     description: string;
     journalType: JournalType;
     content: string;
     campaignDetailId: number;
     posterImg: string;
+    owner: User;
   }
 
   interface Faq {
@@ -114,6 +116,7 @@ export declare namespace Dto {
     assetList: Array<Asset>;
     faqList: Array<Faq>;
     journalList: Array<Journal>;
+    campaignIntro: CampaignIntro;
   }
 
   interface File {
@@ -155,5 +158,19 @@ export declare namespace Dto {
     deadline: Date;
     isAttention: boolean;
     isInProgress: boolean;
+  }
+
+  interface PayOrder {
+    id: number;
+    createTime: string;
+    updateTime: string;
+    campaignDetail: CampaignDetail;
+    campaignIntro: CampaignIntro;
+    perk: Perk;
+    owner: User;
+
+    campaignDetailId: number;
+    perkId: number;
+    ownerId: number;
   }
 }

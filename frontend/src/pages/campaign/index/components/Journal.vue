@@ -1,15 +1,16 @@
 <template>
-  2222
-  {{ journalListRef }}
   <template v-for="(item, index) in props.journalList">
     <n-card v-if="Number(index) !== 0" class=" " hoverable>
-      <router-link to="/journal/detail" class="hover:( cursor-pointer)">
+      <div
+        @click="router.push({ name: 'journal-detail', query: { journalId: item.id } })"
+        class="hover:(cursor-pointer)"
+      >
         <p class="font-semibold text-2xl">{{ item.title }}</p>
         <img class="h-60 object-cover my-2" :src="item.posterImg" />
         <p>
           {{ item.description }}
         </p>
-      </router-link>
+      </div>
       <div class="border-t my-2"></div>
       <div class="flex space-x-4">
         <div>
@@ -32,10 +33,11 @@
   import { Dto, JournalType } from '@/model';
 
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   const props = defineProps({
     journalList: { type: Object },
   });
 
-  const journalListRef = ref<Array<Dto.Journal>>();
+  const router = useRouter();
 </script>
 <style scoped></style>

@@ -3,13 +3,13 @@
     <div class="text-center">
       <p class="font-medium text-3xl mt-12"> 活动 </p>
     </div>
-    <MeCampagin />
-    <LoveCampagin />
+    <MeCampaign />
+    <LoveCampaign />
   </div>
 </template>
 
 <script setup lang="ts">
-  import { MeCampagin, LoveCampagin } from './components';
+  import { MeCampaign, LoveCampaign } from './components';
 </script>
 
 <style scoped></style>

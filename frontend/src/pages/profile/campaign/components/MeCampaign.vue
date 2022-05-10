@@ -37,7 +37,15 @@
                 <n-button>删除</n-button>
               </template>
             </n-popconfirm>
-
+            <n-button
+              @click="
+                router.push({
+                  name: 'profile-perk',
+                  query: { campaginId: item.campaignDetailId },
+                })
+              "
+              >回报</n-button
+            >
             <n-button
               class="mr-3"
               @click="
@@ -66,7 +74,7 @@
 
   const removeMeCampaign = (id: number) => {
     //   没开启
-    // fetchRemoveCampaignIntro([id]);
+    fetchRemoveCampaignIntro([id]);
     meCampaignIntroList.value = meCampaignIntroList.value?.filter((item) => item.id != id);
   };
   const router = useRouter();

@@ -1,6 +1,7 @@
 package com.duofan.weichou.dto.model.business;
 
 
+import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.model.business.CampaignDetail;
 import com.duofan.weichou.model.enums.JournalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,10 +35,10 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JournalDto {
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     @Temporal(TemporalType.DATE)
     private Date createTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     @Temporal(TemporalType.DATE)
     private Date updateTime;
 
@@ -48,4 +49,5 @@ public class JournalDto {
     private String content;
     private Long campaignDetailId;
     private String posterImg;
+    private UserDto owner;
 }

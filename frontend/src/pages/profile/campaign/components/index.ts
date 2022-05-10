@@ -1,4 +1,4 @@
-import LoveCampagin from './LoveCampagin.vue';
-import MeCampagin from './MeCampagin.vue';
+import LoveCampaign from './LoveCampaign.vue';
+import MeCampaign from './MeCampaign.vue';
 
-export { LoveCampagin, MeCampagin };
+export { LoveCampaign, MeCampaign };

@@ -1,6 +1,9 @@
 package com.duofan.weichou.dto.model.business;
 
 
+import com.duofan.weichou.dto.model.common.UserDto;
+import com.duofan.weichou.model.business.CampaignDetail;
+import com.duofan.weichou.model.business.Perk;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -39,4 +42,13 @@ public class PayOrderDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date updateTime;
+
+    private Long perkId;
+    private Long campaignDetailId;
+    private Long ownerId;
+
+    private UserDto owner;
+    private PerkDto perk;
+//    private CampaignDetailDto campaignDetail;
+    private CampaignIntroDto campaignIntro;
 }

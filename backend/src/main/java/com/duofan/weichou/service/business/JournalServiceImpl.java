@@ -3,8 +3,10 @@ package com.duofan.weichou.service.business;
 
 import com.duofan.weichou.controller.v1.condition.business.JournalCondition;
 import com.duofan.weichou.dto.mapper.business.JournalMapper;
+import com.duofan.weichou.dto.mapper.common.UserMapper;
 import com.duofan.weichou.dto.model.business.JournalDto;
 import com.duofan.weichou.dto.model.common.PageDto;
+import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.exception.type.OwnerException;
 import com.duofan.weichou.model.business.Journal;
 import com.duofan.weichou.repository.business.JournalRepository;
@@ -35,6 +37,8 @@ public class JournalServiceImpl implements JournalService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private JournalMapper journalMapper;
 
     @Override
@@ -56,7 +60,8 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public JournalDto getByPrimaryKey(Long primaryKey) {
-        return modelMapper.map(journalRepository.findById(primaryKey).get(), JournalDto.class);
+        Journal journal = journalRepository.findById(primaryKey).get();
+        return modelMapper.map(journal, JournalDto.class).setOwner(userMapper.toDto(journal.getCampaignDetail().getCampaignIntro().getOwner()));
     }
 
     @Override

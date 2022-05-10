@@ -33,13 +33,15 @@ public class PayOrder {
     private Date createTime;
     private Date updateTime;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(optional = false)
     private User owner;
 
+    @ToString.Exclude
     @ManyToOne(targetEntity = Perk.class)
     private Perk perk;
-
+    @ToString.Exclude
     @ManyToOne(targetEntity = CampaignDetail.class)
+    @JoinColumn(name = "detail_id", referencedColumnName = "id")
     private CampaignDetail  campaignDetail;
 
 

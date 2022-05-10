@@ -2,6 +2,7 @@ package com.duofan.weichou.service.business;
 
 
 import com.duofan.weichou.controller.v1.condition.business.CampaignIntroCondition;
+import com.duofan.weichou.dto.mapper.business.CampaignDetailMapper;
 import com.duofan.weichou.dto.mapper.business.CampaignIntroMapper;
 import com.duofan.weichou.dto.mapper.common.UserMapper;
 import com.duofan.weichou.dto.model.business.CampaignIntroDto;
@@ -12,9 +13,11 @@ import com.duofan.weichou.model.business.CampaignDetail;
 import com.duofan.weichou.model.business.CampaignIntro;
 import com.duofan.weichou.model.business.Category;
 import com.duofan.weichou.model.common.User;
+import com.duofan.weichou.repository.business.CampaignDetailRepository;
 import com.duofan.weichou.repository.business.CampaignIntroRepository;
 import com.duofan.weichou.repository.common.UserRepository;
 import com.duofan.weichou.service.common.UserService;
+import io.swagger.models.Model;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,10 +48,15 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private CampaignDetailRepository campaignDetailRepository;
+    @Autowired
     private UserService userService;
 
     @Autowired
     private CampaignIntroMapper campaignIntroMapper;
+
+    @Autowired
+    private CampaignDetailMapper campaignDetailMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -65,9 +73,13 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.findUserByUsername(email);
         CampaignIntro model = modelMapper.map(dto, CampaignIntro.class);
-        model.setCreateTime(new Date()).setUpdateTime(new Date()).setEye(false).setOwner(new User().setId(user.getId()));
-        model.setCampaignDetail(new CampaignDetail().setCreateTime(new Date()).setUpdateTime(new Date()));
-        return modelMapper.map(campaignIntroRepository.save(model), CampaignIntroDto.class);
+        model.setCreateTime(new Date()).setUpdateTime(new Date()).setEye(false).setOwner(new User().setId(user.getId())).setCurrentMoney(0d)
+                .setCampaignDetail(new CampaignDetail().setCreateTime(new Date()).setUpdateTime(new Date()));
+        CampaignIntro save = campaignIntroRepository.save(model);
+        CampaignDetail campaignDetail =model.getCampaignDetail()
+                .setCampaignIntro(new CampaignIntro().setId(save.getId()));
+        campaignDetailRepository.save(campaignDetail);
+        return modelMapper.map(save, CampaignIntroDto.class);
     }
 
     @Override
@@ -91,6 +103,8 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
             }
             if (condition.getIsFinish()!=null&&condition.getIsFinish()) {
                 predicateList.add(criteriaBuilder.lessThan(root.get("endTime").as(Date.class), new Date()));
+            }else{
+                predicateList.add(criteriaBuilder.greaterThan(root.get("endTime").as(Date.class), new Date()));
             }
             return criteriaQuery.where(predicateList.toArray(new Predicate[predicateList.size()])).getRestriction();
         };
@@ -111,7 +125,9 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
                 () -> new OwnerException("修改的部门不存在！")
         );
         //model.setName(dto.getName()).setDescription(dto.getDescription()).setUpdateTime(new Date());
-        modelMapper.map(dto, model);
+//        modelMapper.map(dto, model);
+//        model.setOwner(new User().setId(user.getId()));
+        model.setTotalMoney(dto.getTotalMoney());
         return modelMapper.map(campaignIntroRepository.save(model), CampaignIntroDto.class);
     }
 

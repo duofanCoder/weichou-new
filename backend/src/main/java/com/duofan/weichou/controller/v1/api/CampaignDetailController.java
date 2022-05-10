@@ -65,7 +65,4 @@ public class CampaignDetailController {
     public Response get(@PathVariable("id") Long id) {
         return Response.ok().setData(campaignDetailService.getDetail(id));
     }
-
-
-
 }

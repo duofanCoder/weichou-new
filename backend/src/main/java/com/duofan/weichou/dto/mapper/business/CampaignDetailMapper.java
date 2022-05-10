@@ -36,7 +36,7 @@ public class CampaignDetailMapper {
         }
         return new CampaignDetailDto()
                 .setId(model.getId())
-//                .setCampaignIntroId(model.getCampaignIntro().getId())
+                .setCampaignIntroId(model.getCampaignIntro()!=null?model.getCampaignIntro().getId():null)
                 .setAssetList(assetMapper.toAssetDtoList(model.getAssetList()))
                 .setFaqList(faqMapper.toFaqDtoList(model.getFaqList()))
                 .setJournalList(journalMapper.toJournalDtoList(model.getJournalList()))

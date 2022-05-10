@@ -34,7 +34,7 @@ public class PayOrderController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('COMMON')")
     @PostMapping("remove")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public Response remove(Long[] primaryKeys) {
@@ -42,14 +42,14 @@ public class PayOrderController {
         return Response.ok();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('COMMON')")
     @PostMapping("update")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public Response update(@RequestBody PayOrderRequest payOrderRequest) {
         return Response.ok().setData(payOrderService.update(modelMapper.map(payOrderRequest, PayOrderDto.class)));
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('COMMON')")
     @PostMapping("save")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public Response save(@RequestBody PayOrderRequest payOrderRequest) {

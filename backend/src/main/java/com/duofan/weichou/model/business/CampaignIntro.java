@@ -33,18 +33,19 @@ public class CampaignIntro {
     private String description;
     private String location;
     @ToString.Exclude
-    @ManyToOne(targetEntity = Category.class,cascade = CascadeType.REFRESH)
+    @ManyToOne(targetEntity = Category.class)
     private Category category;
     private boolean isEye;
     private Double totalMoney;
     private Double currentMoney;
     private Date endTime;
     @ToString.Exclude
-    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
-    @JoinColumn(name = "detail_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "detail_id", referencedColumnName = "id",updatable = false)
     private CampaignDetail campaignDetail;
 
     @ToString.Exclude
     @ManyToOne(targetEntity = User.class)
-    private User  owner;
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
 }
