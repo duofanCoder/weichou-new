@@ -39,9 +39,12 @@
     campaignDetailId: campaginId,
     journalType: JournalType.JOURNAL,
   });
-  fetchGetJournal(journalId.value).then((res) => {
-    Object.assign(journalRef.value, res.data);
-  });
+  if (journalId.value != NaN) {
+    fetchGetJournal(journalId.value).then((res) => {
+      Object.assign(journalRef.value, res.data);
+    });
+  }
+
   const onUploadImg = async (files: Array<File>, callback: (urls: string[]) => void) => {
     const res = await Promise.all(
       files.map((file) => {
