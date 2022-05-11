@@ -39,7 +39,7 @@
     campaignDetailId: campaginId,
     journalType: JournalType.JOURNAL,
   });
-  if (journalId.value != NaN) {
+  if (journalId.value > 0) {
     fetchGetJournal(journalId.value).then((res) => {
       Object.assign(journalRef.value, res.data);
     });
