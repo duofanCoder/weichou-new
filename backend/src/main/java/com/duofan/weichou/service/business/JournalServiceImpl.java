@@ -8,7 +8,9 @@ import com.duofan.weichou.dto.model.business.JournalDto;
 import com.duofan.weichou.dto.model.common.PageDto;
 import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.exception.type.OwnerException;
+import com.duofan.weichou.model.business.CampaignDetail;
 import com.duofan.weichou.model.business.Journal;
+import com.duofan.weichou.model.enums.JournalType;
 import com.duofan.weichou.repository.business.JournalRepository;
 import org.hibernate.engine.query.spi.ParamLocationRecognizer;
 import org.modelmapper.ModelMapper;
@@ -66,15 +68,16 @@ public class JournalServiceImpl implements JournalService {
 
     @Override
     public PageDto<JournalDto> findPageByCondition(JournalCondition condition) {
+        // 未作分页
         LinkedList<JournalDto> list = new LinkedList<>();
         PageRequest pageable = PageRequest.of(condition.getPageNum(), condition.getPageSize());
-        Page<Journal> modelPages = journalRepository.findByTitleContaining(condition.getName(), pageable);
-        for (Journal campaign : modelPages.getContent()) {
+        List<Journal> modelPages = journalRepository.findByCampaignDetailAndJournalType(new CampaignDetail().setId(condition.getCampaignId()), JournalType.JOURNAL);
+        for (Journal campaign : modelPages) {
             list.add(modelMapper.map(campaign, JournalDto.class));
         }
         return new PageDto<JournalDto>()
                 .setCurrentPage(pageable.getPageNumber())
-                .setTotalPage(modelPages.getTotalPages())
+                .setTotalPage(1)
                 .setData(list);
     }
 

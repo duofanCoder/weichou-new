@@ -21,6 +21,7 @@ import lombok.experimental.Accessors;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JournalCondition extends BaseCondition {
     private String name;
+    private Long campaignId;
 
     public String getName() {
         if (this.name == null) {
