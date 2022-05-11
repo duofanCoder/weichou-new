@@ -72,6 +72,7 @@ export declare namespace Dto {
     supportCount: number;
     campaignDetailId: number;
     isEye: boolean;
+    owner: User;
     createTime: Date;
   }
 
@@ -112,6 +113,7 @@ export declare namespace Dto {
     faqsIds: number[];
     journalIds: number[];
     perkIds: number[];
+    story: Journal;
     perkList: Array<Perk>;
     assetList: Array<Asset>;
     faqList: Array<Faq>;

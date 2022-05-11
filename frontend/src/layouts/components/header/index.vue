@@ -17,7 +17,9 @@
             </n-button>
           </n-el>
           <n-el>
-            <n-button text class="text-base"><p class="font-bold">We Do</p></n-button>
+            <n-button text class="text-base" @click="handleSelect('wedo')"
+              ><p class="font-bold">We Do</p></n-button
+            >
           </n-el>
           <n-el>
             <n-button
@@ -46,14 +48,18 @@
             </n-button>
             <div v-if="isLogin">
               <router-link to="/profile">
-                <img class="w-10 h-10 rounded-full" src="@/assets/material/avatar.png" alt="" />
+                <n-avatar
+                  class="w-10 h-10 rounded-full"
+                  round
+                  :src="userStore.userInfo.avatar"
+                ></n-avatar>
               </router-link>
             </div>
           </n-el>
         </n-space>
       </n-space>
 
-      <n-space v-else justify="space-between" align="center" class="min-w-160 h-64px px-6 border-b">
+      <n-space v-else justify="space-between" align="center" class="w-full h-64px px-6 border-b">
         <div class="flex items-center">
           <n-dropdown
             trigger="click"
@@ -89,7 +95,13 @@
     >
       <div class="w-screen items-center space-x-3 h-full flex px-4">
         <i-ic-baseline-search class="align-middle" />
-        <input type="text" class="outline-none w-full" placeholder="搜索" />
+        <input
+          v-model="searchKeyRef"
+          type="text"
+          class="outline-none w-full"
+          placeholder="搜索"
+          @keyup.enter="searchEnterEvent"
+        />
         <n-button text @click="showSearchRef = false">
           <i-mdi-close class="align-middle" />
         </n-button>
@@ -110,11 +122,25 @@
       :trap-focus="false"
       to="#drawer-target"
     >
-      <div class="w-screen-md mx-auto">
+      <div class="w-screen-lg mx-auto px-4">
         <div class="flex py-12 justify-between">
           <div class="flex flex-col">
             <p class="font-bold mb-1"> 浏览所有项目</p>
-            <p class="w-64 h-24 bg-true-gray-100"> Clever Things For Curious Humans </p>
+            <p
+              :style="{
+                backgroundImage: `url('/src/assets/img/dropdown_banner_2x.png')`,
+              }"
+              class="h-full w-386px bg-cover object-cover bg-true-gray-100 text-center flex text-center"
+            >
+              <router-link
+                to="/explore"
+                @click="showDrawerRef = false"
+                class="mx-auto my-auto font-bold text-xl hover:(text-green-500) cursor-pointer"
+              >
+                Clever Things For <br />
+                Curious Humans
+              </router-link>
+            </p>
           </div>
           <div class="flex flex-col">
             <p class="font-bold mb-1"> 活动排行榜 </p>
@@ -139,54 +165,76 @@
 </template>
 <script setup lang="ts">
   import { Logo } from '@/components';
+  import { useRouterPush } from '@/router/router';
   import { useUserStore } from '@/store';
   import { isMobile } from '@/utils';
-  import { logDark } from 'naive-ui';
-  import { computed, ref, unref, watch } from 'vue';
+
+  import { computed, ref } from 'vue';
 
   const showDrawerRef = ref(false);
   const showSearchRef = ref(false);
+  const routerPush = useRouterPush();
 
   const userStore = useUserStore();
   const isMobileRef = isMobile();
   const isLogin = computed(() => Boolean(userStore.isLogin));
 
-  const options = [
-    {
-      label: '主页',
-      key: 'index',
-    },
-    {
-      label: '浏览',
-      key: 'explore',
-    },
-    {
-      label: 'We Do',
-      key: 'wedo',
-    },
-    {
-      label: '开展活动',
-      key: 'start',
-    },
-    {
-      label: '我的活动',
-      key: 'campaigns',
-    },
-    {
-      label: '我的赞助',
-      key: 'contributions',
-    },
-    {
-      label: '设置',
-      key: 'settings',
-    },
-    {
-      label: '退出',
-      key: 'logout',
-    },
-  ];
+  const options = computed(() => {
+    if (userStore.isLogin) {
+      return [
+        {
+          label: '主页',
+          key: 'index',
+        },
+        {
+          label: '浏览',
+          key: 'explore',
+        },
+        {
+          label: 'We Do',
+          key: 'wedo',
+        },
+        {
+          label: '我的',
+          key: 'profile',
+        },
+        {
+          label: '退出',
+          key: 'logout',
+        },
+      ];
+    } else {
+      return [
+        {
+          label: '主页',
+          key: 'index',
+        },
+        {
+          label: '浏览',
+          key: 'explore',
+        },
+        {
+          label: 'We Do',
+          key: 'wedo',
+        },
+        {
+          label: '登录',
+          key: 'login',
+        },
+      ];
+    }
+  });
+  const searchKeyRef = ref('');
+  const searchEnterEvent = () => {
+    routerPush.routerPush({ name: 'explore', params: { searchKey: searchKeyRef.value } });
+    showSearchRef.value = false;
+  };
   const handleSelect = (key: string) => {
-    window.$message.info(key);
+    if (key == 'wedo') {
+      routerPush.routerPush({ name: 'journal-detail', query: { journalId: 23 } });
+      return;
+    }
+    routerPush.routerPush({ name: key });
   };
 </script>
 <style scoped>

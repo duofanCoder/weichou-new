@@ -22,6 +22,8 @@ import lombok.experimental.Accessors;
 public class PayOrderCondition extends BaseCondition {
     private String name;
 
+    private Long detailId;
+
     public String getName() {
         if (this.name == null) {
             return "";

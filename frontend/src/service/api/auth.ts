@@ -1,4 +1,5 @@
 import { request } from '../request';
+import { Condition, Dto } from '@/model';
 
 /**
  * 登录

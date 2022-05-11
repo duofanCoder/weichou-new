@@ -4,7 +4,7 @@
       <p class="font-medium text-3xl mt-12"> 活动 </p>
     </div>
     <MeCampaign />
-    <LoveCampaign />
+    <!-- <LoveCampaign /> -->
   </div>
 </template>
 

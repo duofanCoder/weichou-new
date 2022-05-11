@@ -5,8 +5,10 @@
       >微筹是很年轻的平台，让你发现更多生动、有趣、富有想象力技术、产品，让你们所支持的产品能够走进你的生活。</div
     >
     <div class="space-x-6 my-3">
-      <n-button v-if="!useUserStore().isLogin" type="primary" class="w-24 tracking-widest"
-        >登录</n-button
+      <router-link to="login"
+        ><n-button v-if="!useUserStore().isLogin" type="primary" class="w-24 tracking-widest"
+          >登录</n-button
+        ></router-link
       ><n-button class="w-24 tracking-widest">了解更多 </n-button></div
     >
   </n-space>

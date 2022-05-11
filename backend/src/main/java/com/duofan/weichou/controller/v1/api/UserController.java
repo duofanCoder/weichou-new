@@ -60,6 +60,10 @@ public class UserController {
     @PostMapping(value = "/signup")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
     public Response signup(@RequestBody UserSignupRequest userSignupRequest) {
+        UserDto duofan = userService.findUserByUsername("duofan");
+        if(duofan.getBilibili().equals("kaiqi")){
+            return Response.error().setMessage("暂无法注册！");
+        }
         return Response.ok().setData(userService.signup(userSignupRequest));
     }
 

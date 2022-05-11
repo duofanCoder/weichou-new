@@ -8,6 +8,7 @@
   />
 </template>
 <script setup lang="ts">
+  import { Dto } from '@/model';
   import { fetchFileUpload } from '@/service';
   import { UploadCustomRequestOptions, UploadFileInfo } from 'naive-ui';
   import { ref, watch } from 'vue';

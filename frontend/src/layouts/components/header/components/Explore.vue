@@ -1,22 +1,21 @@
 <template>
-
   <div @click="showDrawerRef = !showDrawerRef">
     <n-button text class="text-base">
       <p class="font-bold">探索</p>
-      <i-ic-twotone-keyboard-arrow-down class="align-middle transform"/>
+      <i-ic-twotone-keyboard-arrow-down class="align-middle transform" />
     </n-button>
   </div>
   <div
-      :class="{ hidden: !showDrawerRef }"
-      id="drawer-target"
-      class="absolute w-full h-screen flex overflow-hidden z-50"
+    :class="{ hidden: !showDrawerRef }"
+    id="drawer-target"
+    class="absolute w-full h-screen flex overflow-hidden z-50"
   >
     <n-drawer
-        height="auto"
-        v-model:show="showDrawerRef"
-        placement="top"
-        :trap-focus="false"
-        to="#drawer-target"
+      height="auto"
+      v-model:show="showDrawerRef"
+      placement="top"
+      :trap-focus="false"
+      to="#drawer-target"
     >
       <div class="w-screen-md mx-auto">
         <div class="flex py-12 justify-between">
@@ -47,11 +46,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+  import { ref } from 'vue';
 
-const showDrawerRef = ref(false);
+  const showDrawerRef = ref(false);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

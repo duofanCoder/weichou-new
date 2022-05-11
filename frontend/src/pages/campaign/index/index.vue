@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col xl:(px-180px)">
+  <div class="flex flex-col md:(px-20px) lg:(px-100px) xl:(px-180px)">
     <div class="flex flex-col justify-center mt-0 items-center md:(flex-row mt-6 ) gap-8 mx-auto">
       <!-- md:(w-120 h-80) xl:(w-160 h-90) -->
       <Carousel :assetList="campaignDetail?.assetList" />

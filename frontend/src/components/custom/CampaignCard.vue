@@ -71,7 +71,7 @@
   import { Love } from '@/components';
   import { Dto } from '@/model';
   import { useElementSize } from '@vueuse/core';
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
 
   const cardRef = ref(null);
@@ -85,11 +85,9 @@
     },
   });
 
-  const getNumberDate = computed(() => {
-    return Number(campaign.endTime);
-  });
-
   const router = useRouter();
-  const raisedPercentage = (campaign?.currentMoney / campaign.totalMoney) * 100;
+  const raisedPercentage = Number(
+    ((campaign?.currentMoney / campaign.totalMoney) * 100).toFixed(2)
+  );
 </script>
 <style scoped></style>

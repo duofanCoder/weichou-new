@@ -1,7 +1,7 @@
 <template>
   <n-carousel draggable autoplay :show-dots="false" show-arrow>
-    <img class="carousel-img" src="@/assets/material/carousel_1.jpg" />
     <img class="carousel-img" src="@/assets/material/carousel_3.png" />
+    <img class="carousel-img" src="@/assets/material/carousel_1.jpg" />
     <img class="carousel-img" src="@/assets/material/carousel_2.png" />
     <img class="carousel-img" src="@/assets/material/carousel_4.png" />
 

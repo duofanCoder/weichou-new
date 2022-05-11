@@ -10,6 +10,7 @@ import com.duofan.weichou.dto.model.business.PayOrderDto;
 import com.duofan.weichou.dto.model.common.PageDto;
 import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.exception.type.OwnerException;
+import com.duofan.weichou.model.business.CampaignDetail;
 import com.duofan.weichou.model.business.CampaignIntro;
 import com.duofan.weichou.model.business.PayOrder;
 import com.duofan.weichou.model.business.Perk;
@@ -98,11 +99,18 @@ public class PayOrderServiceImpl implements PayOrderService {
 
     @Override
     public PageDto<PayOrderDto> findPageByCondition(PayOrderCondition condition) {
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto user = userService.findUserByUsername(email);
+        // 权限问题未处理
+        // 部分支持订单，用户无法查看
         LinkedList<PayOrderDto> list = new LinkedList<>();
         PageRequest pageable = PageRequest.of(condition.getPageNum(), condition.getPageSize());
-        List<PayOrder> modelPages = payOrderRepository.findPayOrderByOwner(new User().setId(user.getId()));
+        List<PayOrder> modelPages =null;
+        if(condition.getDetailId()!=null && condition.getDetailId()!=0){
+            modelPages=payOrderRepository.findPayOrderByCampaignDetail(new CampaignDetail().setId(condition.getDetailId()));
+        }else{
+            String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDto user = userService.findUserByUsername(email);
+            modelPages = payOrderRepository.findPayOrderByOwner(new User().setId(user.getId()));
+        }
         for (PayOrder campaign : modelPages) {
             list.add(modelMapper.map(campaign, PayOrderDto.class)
                     .setCampaignIntro(campaignIntroMapper.toCampaignIntroDto(campaign.getCampaignDetail().getCampaignIntro()))

@@ -108,6 +108,7 @@
     password: '123456',
     email: '2441051071@qq.com',
     rememberMe: false,
+    rePassword: '',
   });
   const loginFormRef = ref();
   const registerFormRef = ref();

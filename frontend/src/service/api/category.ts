@@ -1,4 +1,5 @@
 import { request } from '../request';
+import { Condition, Dto } from '@/model';
 
 export function fetchQueryCategory(condition: Partial<Condition.Common>) {
   return request.post<Dto.Page<Dto.Category>>('/category/query', condition);

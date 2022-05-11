@@ -1,4 +1,5 @@
-import { Dto } from '@/model/object/dto';
+import { Condition, Dto } from '@/model';
+
 import { request } from '../request';
 
 export function fetchQueryAsset(condition: Partial<Condition.Common>) {

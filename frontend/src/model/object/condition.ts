@@ -1,10 +1,11 @@
 import { JournalType } from '../enum';
 
-declare namespace Condition {
+export declare namespace Condition {
   interface Common {
     name: string;
     pageSize: number;
     pageNum: number;
+    journalType: JournalType;
   }
   interface User {
     pageSize: number;
@@ -16,7 +17,7 @@ declare namespace Condition {
   }
 
   interface Campaign {
-    title: string;
+    title: string | undefined;
     isFinish: boolean;
     categoryId: number;
     pageSize: number;
@@ -26,7 +27,7 @@ declare namespace Condition {
   interface Journal {
     pageSize: number;
     pageNum: number;
-    jorunalType: JournalType;
+    journalType: JournalType;
     campaignId: number;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(item, index) in props.journalList">
+  <template v-if="props.journalList != undefined" v-for="(item, index) in props.journalList">
     <n-card v-if="Number(index) !== 0" class=" " hoverable>
       <div
         @click="router.push({ name: 'journal-detail', query: { journalId: item.id } })"
@@ -28,6 +28,9 @@
       </div>
     </n-card>
   </template>
+  <div v-if="props.journalList != undefined && props.journalList.length < 2">
+    还有更新任何动态
+  </div>
 </template>
 <script setup lang="ts">
   import { Dto, JournalType } from '@/model';

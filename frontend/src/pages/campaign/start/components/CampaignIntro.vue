@@ -35,6 +35,7 @@
   import { onMounted, reactive, ref } from 'vue';
   import { fetchQueryCategory } from '@/service';
   import { SelectOption } from 'naive-ui';
+  import { Condition, Dto } from '@/model';
 
   const campaignIntroModel = ref<Partial<Dto.CampaignIntro>>({});
   defineExpose({
@@ -46,12 +47,14 @@
   const condition = reactive<Partial<Condition.Common>>({ pageSize: 999 });
   const reload = () => {
     fetchQueryCategory(condition).then((res) => {
-      categoryOptions.value = res.data?.data.map((item) => {
-        return {
-          label: item.name,
-          value: item.id,
-        };
-      });
+      if (res.data != null) {
+        categoryOptions.value = res.data.data.map((item) => {
+          return {
+            label: item.name,
+            value: item.id,
+          };
+        });
+      }
     });
   };
   //

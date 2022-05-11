@@ -1,14 +1,14 @@
 <template>
   <div class="flex">
-    <div v-if="journalRef != null" class="mx-auto max-w-690px h-full">
+    <div v-if="journalRef != null" class="mx-auto max-w-690px h-full px-3">
       <n-space class="w-full" vertical>
-        <div>
+        <div class="-mx-3">
           <img :src="journalRef.posterImg" alt="" />
         </div>
-        <div class="text-3xl font-bold">
+        <div class="text-2xl sm:( text-3xl) font-bold">
           {{ journalRef.title }}
         </div>
-        <div class="w-full flex justify-between">
+        <div class="w-full flex justify-between items-center">
           <div
             v-if="journalRef.owner != null"
             class="flex items-center mb-2 gap-2 hover:(cursor-pointer)"
@@ -22,7 +22,6 @@
           <p> 发布时间: {{ journalRef.createTime }} </p>
         </div>
       </n-space>
-
       <md-editor v-model="journalRef.content" :preview-only="true" />
     </div>
   </div>

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @Slf4j
-//@ControllerAdvice
+@ControllerAdvice
 public class BaseExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static void logFormat(String exMessage, String uri) {

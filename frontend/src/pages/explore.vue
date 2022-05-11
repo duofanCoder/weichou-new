@@ -119,7 +119,7 @@
             :page-count="paginationInfoRef.pageCount"
           />
         </div>
-        <div class="flex flex-col w-full px-40 pb-17 font-semibold gap-4 md:(gap-7)" v-else>
+        <div class="flex flex-col w-full pb-17 font-semibold gap-4 md:(gap-7)" v-else>
           <img class="mx-auto w-max-600px h-auto" src="@/assets/img/surr-404.png" />
         </div>
       </div>
@@ -128,25 +128,33 @@
 </template>
 <script setup lang="ts">
   import { CampaignCard } from '@/components';
-  import { Dto } from '@/model';
+  import { Condition, Dto } from '@/model';
   import { fetchQueryCampaignIntro, fetchQueryCategory } from '@/service';
   import { PaginationInfo } from 'naive-ui';
   import { onMounted, reactive, ref, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   const campaignListRef = ref<Array<Dto.CampaignIntro>>([]);
   const radioNumberValueRef = ref(0);
+  const route = useRoute();
+  const categoryId = Number(route.params.categoryId);
+  const searchKey = String(route.params.searchKey);
+
   const condition = reactive<Partial<Condition.Campaign>>({
     pageSize: 9,
     pageNum: 0,
-    categoryId: 0,
+    categoryId: categoryId != NaN ? categoryId : 0,
+    title: searchKey != 'undefined' && searchKey != undefined ? searchKey : '',
     isFinish: false,
   });
   const paginationInfoRef = reactive<Partial<PaginationInfo>>({});
 
-  const categoryListRef = ref<Array<Dto.Category>>([]);
+  const categoryListRef = ref<Array<Dto.Category>>();
 
   const categoryLoad = () => {
     fetchQueryCategory(condition).then((res) => {
-      categoryListRef.value = res.data?.data;
+      if (res.data != null) {
+        categoryListRef.value = res.data.data;
+      }
     });
   };
 
@@ -171,6 +179,13 @@
       condition.isFinish = true;
     }
     reloadCampaignIntro();
+  });
+
+  watch(paginationInfoRef, (n) => {
+    if (n.page != undefined) {
+      condition.pageNum = n.page - 1;
+      reloadCampaignIntro();
+    }
   });
 </script>
 <style scoped></style>

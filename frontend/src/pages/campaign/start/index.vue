@@ -1,3 +1,4 @@
+<!-- @ts-nocheck -->
 <template>
   <div class="h-full mb-auto pt-64px">
     <div class="flex gap-12 mx-auto">
@@ -74,8 +75,14 @@
   import { Dto } from '@/model';
 
   const currentRef = ref(1);
-  const introRef = ref(null);
-  const detailRef = ref(null);
+  const introRef = ref({
+    campaignIntroModel: Object,
+  });
+  const detailRef = ref({
+    faqRef: { faqList: Object },
+    videoAssetRef: { videoAssetList: Object },
+    journalRef: { journalRef: Object },
+  });
   const perkRef = ref(null);
 
   const faqList = ref<Array<Partial<Dto.Faq>>>([]);

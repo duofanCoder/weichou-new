@@ -47,7 +47,7 @@ public class User {
     private UserRole role;
 
     @OneToMany(targetEntity = CampaignIntro.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id",updatable = false)
     private List<CampaignIntro> campaignIntroList;
 
     @OneToMany(targetEntity = PayOrder.class, fetch = FetchType.LAZY)

@@ -86,7 +86,7 @@
   });
   const selectBirth = (_value: number | null, formattedValue: string | null) => {
     if (formattedValue) {
-      userInfoModel.birth = formattedValue;
+      userInfoModel.birth = new Date(formattedValue);
     }
   };
   const defaultGender = userInfoModel.gender ? 'true' : 'false';

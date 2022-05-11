@@ -22,6 +22,9 @@
   import { useUserStore } from '@/store';
   import { ref } from 'vue';
 
+  const detail = false;
+  const isLove = false;
+  const foucsLove = () => {};
   const { id } = defineProps({
     id: {
       type: Number,

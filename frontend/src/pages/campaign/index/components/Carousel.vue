@@ -1,5 +1,5 @@
 <template>
-  <n-carousel centered-slides class="w-screen h-80 pb-8 sm:(min-w-100 max-w-150)" show-arrow>
+  <n-carousel centered-slides class="w-screen h-80 pb-8 sm:( min-w-100 max-w-150)" show-arrow>
     <div class="w-full h-full" v-for="item in assetList" :key="item.id">
       <iframe
         v-if="item.assetType == 'VIDEO'"

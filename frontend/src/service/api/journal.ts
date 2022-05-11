@@ -1,5 +1,5 @@
-import { Dto } from '@/model';
 import { request } from '../request';
+import { Condition, Dto } from '@/model';
 
 export function fetchQueryJournal(condition: Partial<Condition.Journal>) {
   return request.post<Dto.Page<Dto.Journal>>('/journal/query', condition);

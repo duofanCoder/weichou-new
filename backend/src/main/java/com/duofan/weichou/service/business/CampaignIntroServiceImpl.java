@@ -128,6 +128,7 @@ public class CampaignIntroServiceImpl implements CampaignIntroService {
 //        modelMapper.map(dto, model);
 //        model.setOwner(new User().setId(user.getId()));
         model.setTotalMoney(dto.getTotalMoney());
+        model.setCurrentMoney(dto.getCurrentMoney());
         return modelMapper.map(campaignIntroRepository.save(model), CampaignIntroDto.class);
     }
 

@@ -1,3 +1,4 @@
+import { Dto } from '@/model';
 import { useRouterPush } from '@/router/router';
 import { fetchLogin, fetchUserInfo } from '@/service';
 import { clearAuthStorage, getToken, getUserInfo, setToken, setUserInfo } from '@/utils';
@@ -24,7 +25,7 @@ export const useUserStore = defineStore({
       setUserInfo(info);
       this.$state.userInfo = info;
     },
-    async loginByToken(backendToken: Dto.Token, isAdmin: boolean) {
+    async loginByToken(backendToken: Dto.Token, isAdmin?: boolean) {
       const { toLoginRedirect, routerPush } = useRouterPush(false);
 
       // 先把token存储到缓存中
@@ -34,11 +35,11 @@ export const useUserStore = defineStore({
       // 获取用户信息
       const { data } = await fetchUserInfo();
 
-      if (isAdmin && data?.role != 'ADMIN') {
-        window.$message.warning('请使用管理员账号登录！');
-        clearAuthStorage();
-        return;
-      }
+      // if (isAdmin && data?.role != 'ADMIN') {
+      //   window.$message.warning('请使用管理员账号登录！');
+      //   clearAuthStorage();
+      //   return;
+      // }
 
       if (data) {
         // 成功后把用户信息存储到缓存中
@@ -68,7 +69,7 @@ export const useUserStore = defineStore({
      * @param pwdOrCode - 密码或验证码
      * @param type - 登录方式: pwd - 密码登录; sms - 验证码登录
      */
-    async login(email: string, password: string, isAdmin: boolean) {
+    async login(email: string, password: string, isAdmin?: boolean) {
       // 同步等待，直接出data
       const { data } = await fetchLogin(email, password);
       if (data) {

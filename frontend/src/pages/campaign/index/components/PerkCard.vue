@@ -1,16 +1,16 @@
 <template>
   <div>
-    <n-card hoverable class="mb-3">
-      <div class="font-bold text-base mb-2"> {{ perk.title }} </div>
-      <div class="text-gray-400 h-40">
-        {{ perk.description }}
+    <n-card hoverable class="mb-3" v-if="props.perk != undefined">
+      <div class="font-bold text-base mb-2"> {{ props.perk.title }} </div>
+      <div class="text-gray-400 h-35">
+        {{ props.perk.description }}
       </div>
-      <img class="rounded-xl object-contain h-auto w-auto" :src="perk.posterImg" />
+      <img class="rounded-xl object-cover h-115px w-204px" :src="props.perk.posterImg" />
       <div class="flex justify-between mt-2">
-        <p class="font-bold"> 支持￥{{ perk.price }}</p>
+        <p class="font-bold"> 支持￥{{ props.perk.price }}</p>
         <!-- <p class="text-gray-400">已支持 569 次</p> -->
       </div>
-      <n-button type="primary" class="w-full mt-2" @click="showModal = true">支持</n-button>
+      <n-button type="primary" class="w-full mt-2" @click="clickSupportEvent">支持</n-button>
     </n-card>
     <n-modal
       v-model:show="showModal"
@@ -28,8 +28,11 @@
 </template>
 <script setup lang="ts">
   import { Dto } from '@/model';
+  import { useRouterPush } from '@/router/router';
   import { fetchSavePayOrder } from '@/service/api/payOrder';
+  import { useUserStore } from '@/store';
   import { PropType, ref } from 'vue';
+  import { useRoute } from 'vue-router';
 
   const props = defineProps({
     perk: {
@@ -37,10 +40,24 @@
     },
   });
 
+  const userStore = useUserStore();
+  const route = useRoute();
+  const routerPush = useRouterPush();
+
   const showModal = ref(false);
+
+  const clickSupportEvent = () => {
+    if (!userStore.isLogin) {
+      window.$message.info('请先登录!');
+      routerPush.toLogin(route.fullPath);
+      return;
+    }
+    showModal.value = true;
+  };
   const onNegativeClick = () => {
     showModal.value = false;
   };
+
   const onPositiveClick = () => {
     fetchSavePayOrder({
       perkId: props.perk?.id,

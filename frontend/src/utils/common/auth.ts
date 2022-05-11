@@ -1,3 +1,4 @@
+import { Dto } from '@/model';
 import { EnumStorageKey } from '@/model/enum/common';
 import { setLocal, getLocal, removeLocal } from '../storage';
 
@@ -36,13 +37,13 @@ export function getUserInfo() {
     username: '',
     nickname: '',
     mobile: '',
-    role: '',
     avatar: '',
-    birth: '',
+    birth: new Date(),
     gender: false,
-    shelf: [],
     email: '',
     password: '',
+    wechat: '',
+    bilibili: '',
   };
   const userInfo: Dto.User = getLocal<Dto.User>(EnumStorageKey['user-info']) || emptyInfo;
   return userInfo;

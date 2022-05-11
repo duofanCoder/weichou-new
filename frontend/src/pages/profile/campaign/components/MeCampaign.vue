@@ -4,6 +4,12 @@
     <p class="px-6 tracking-widest mb-4">活动可不是简简单单的发起就会成功的。</p>
 
     <div
+      v-if="meCampaignIntroList?.length == 0"
+      class="flex flex-col w-full pb-17 font-semibold gap-4 md:(gap-7)"
+    >
+      <img class="mx-auto w-max-600px h-auto" src="@/assets/img/surr-404.png" />
+    </div>
+    <div
       v-for="item in meCampaignIntroList"
       :key="item.id"
       class="flex text-base rounded-lg mx-6 hover:(bg-true-gray-100 )"
@@ -40,8 +46,8 @@
             <n-button
               @click="
                 router.push({
-                  name: 'profile-perk',
-                  query: { campaginId: item.campaignDetailId },
+                  name: 'profile-campaign-perk',
+                  query: { detailId: item.campaignDetailId },
                 })
               "
               >回报</n-button

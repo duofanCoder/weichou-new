@@ -11,13 +11,9 @@ export async function createPermissionGuard(
   const needLogin = Boolean(to.meta?.auth);
   const needAdmin = Boolean(to.meta?.admin);
   const userStore = useUserStore();
-  const isAdmin = userStore.userInfo.role == 'ADMIN';
+  const isAdmin = false;
   const isLogin = Boolean(getToken());
 
-  console.log('needLogin:' + needLogin);
-  console.log('needAdmin:' + needAdmin);
-  console.log('isAdmin:' + isAdmin);
-  console.log('isLogin:' + isLogin);
   // needLogin:true
   // permission.ts:18 needAdmin:true
   // permission.ts:19 isAdmin:false
@@ -31,7 +27,7 @@ export async function createPermissionGuard(
       () => {
         next({ name: 'index' });
 
-        console.log('已登录状态跳转登录页，跳转至首页');
+        // console.log('已登录状态跳转登录页，跳转至首页');
       },
     ],
     // 不需要登录权限的页面直接通行
@@ -39,7 +35,7 @@ export async function createPermissionGuard(
       !needLogin && !needAdmin,
       () => {
         next();
-        console.log('不需要登录权限的页面直接通行');
+        // console.log('不需要登录权限的页面直接通行');
       },
     ],
     // 未登录状态进入需要登录权限的页面
@@ -48,7 +44,7 @@ export async function createPermissionGuard(
       () => {
         const redirect = to.fullPath;
         next({ name: 'login', query: { redirect } });
-        console.log('未登录状态进入需要登录权限的页面');
+        // console.log('未登录状态进入需要登录权限的页面');
       },
     ],
     // 登录状态进入需要登录权限的页面，有权限直接通行
@@ -56,7 +52,7 @@ export async function createPermissionGuard(
       isLogin && needLogin && !needAdmin && !isAdmin,
       () => {
         next();
-        console.log('登录状态进入需要登录权限的页面，有权限直接通行');
+        // console.log('登录状态进入需要登录权限的页面，有权限直接通行');
       },
     ],
 
@@ -66,7 +62,7 @@ export async function createPermissionGuard(
       () => {
         const redirect = to.fullPath;
         next({ name: 'login', query: { redirect } });
-        console.log('未登录状态进入需要登录权限的ADMIN页面');
+        // console.log('未登录状态进入需要登录权限的ADMIN页面');
       },
     ],
     // 登录状态进入需要登录权限的ADMIN页面，有权限直接通行
@@ -74,21 +70,21 @@ export async function createPermissionGuard(
       isLogin && needLogin && needAdmin && isAdmin,
       () => {
         next();
-        console.log('登录状态进入需要登录权限的ADMIN页面，有权限直接通行');
+        // console.log('登录状态进入需要登录权限的ADMIN页面，有权限直接通行');
       },
     ],
     [
       isLogin && needLogin && isAdmin,
       () => {
         next({ name: 'admin' });
-        console.log('没找到是直接进管理员');
+        // console.log('没找到是直接进管理员');
       },
     ],
     [
       isLogin && needLogin && !isAdmin,
       () => {
         next({ name: 'profile' });
-        console.log('没找到是直接进个人页面');
+        // console.log('没找到是直接进个人页面');
       },
     ],
     // [
@@ -108,5 +104,5 @@ export async function createPermissionGuard(
     return flag;
   });
 
-  console.log('路由结束');
+  // console.log('路由结束');
 }

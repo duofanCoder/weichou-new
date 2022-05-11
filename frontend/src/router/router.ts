@@ -56,8 +56,6 @@ export function useRouterPush(inSetup: boolean = true) {
    */
   function toLoginRedirect() {
     const { query } = route.value;
-    console.log(query);
-
     if (query?.redirect) {
       routerPush(query.redirect as string);
     } else {

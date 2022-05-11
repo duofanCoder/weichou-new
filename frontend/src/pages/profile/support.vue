@@ -10,7 +10,13 @@
       <p class="mt-2 px-6 tracking-widest mb-4">使用微筹的其他用户可能会看到部分信息。</p>
       <!-- w-50 -->
 
-      <n-table class="px-6" :bordered="false" :single-line="false" size="large">
+      <n-table
+        v-if="payOrderList?.length != 0"
+        class="px-6"
+        :bordered="false"
+        :single-line="false"
+        size="large"
+      >
         <thead>
           <tr>
             <th>日期</th>
@@ -49,6 +55,12 @@
           </tr>
         </tbody>
       </n-table>
+      <div
+        v-if="payOrderList?.length == 0"
+        class="flex flex-col w-full pb-17 font-semibold gap-4 md:(gap-7)"
+      >
+        <img class="mx-auto w-max-600px h-auto" src="@/assets/img/surr-404.png" />
+      </div>
     </div>
   </div>
 </template>

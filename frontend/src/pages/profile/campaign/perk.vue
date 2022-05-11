@@ -9,8 +9,16 @@
       <p class="text-2xl px-6">记录</p>
       <p class="mt-2 px-6 tracking-widest mb-4">使用微筹的其他用户可能会看到部分信息。</p>
       <!-- w-50 -->
-
-      <n-table class="px-6" :bordered="false" :single-line="false" size="large">
+      <div class="flex flex-col w-full pb-17 font-semibold gap-4 md:(gap-7)">
+        <img class="mx-auto w-max-600px h-auto" src="@/assets/img/surr-404.png" />
+      </div>
+      <n-table
+        v-if="payOrderList?.length != 0"
+        class="px-6"
+        :bordered="false"
+        :single-line="false"
+        size="large"
+      >
         <thead>
           <tr>
             <th>日期</th>
@@ -20,12 +28,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="item in payOrderList" :key="item.id">
             <td>
-              <n-time :time="4444221122122" format="yyyy年M月d日" />
+              <n-time :time="new Date(item.createTime)" format="yyyy年M月d日 hh:mm" />
             </td>
-            <td class="hover:( underline underline-offset-2 cursor-pointer)">无敌陆游器-海盐版</td>
-            <td>￥ 99999</td>
+            <td class="hover:( underline underline-offset-2 cursor-pointer)">{{
+              item.campaignIntro.title
+            }}</td>
+            <td>￥ {{ item.perk.price }}</td>
 
             <td>
               <n-switch v-model:value="active" size="large">
@@ -40,13 +50,33 @@
           </tr>
         </tbody>
       </n-table>
+
+      <div
+        v-if="payOrderList?.length == 0"
+        class="flex flex-col w-full pb-17 font-semibold gap-4 md:(gap-7)"
+      >
+        <img class="mx-auto w-max-600px h-auto" src="@/assets/img/surr-404.png" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { Dto } from '@/model';
+  import { fetchQueryPayOrder } from '@/service/api/payOrder';
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   const active = ref(false);
+
+  const payOrderList = ref<Array<Dto.PayOrder>>();
+
+  const route = useRoute();
+  const detailId = Number(route.query.detailId);
+  fetchQueryPayOrder({ pageSize: 999, detailId: detailId }).then((res) => {
+    if (res.data != null) {
+      payOrderList.value = res.data?.data;
+    }
+  });
 </script>
 
 <style scoped></style>

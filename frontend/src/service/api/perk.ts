@@ -1,3 +1,4 @@
+import { Condition, Dto } from '@/model';
 import { request } from '../request';
 
 export function fetchQueryPerk(condition: Partial<Condition.Common>) {

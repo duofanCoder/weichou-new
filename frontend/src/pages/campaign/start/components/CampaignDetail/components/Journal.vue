@@ -71,6 +71,6 @@
     v-model="journalRef.content"
     v-on:save="onSave"
     :toolbars="toolbars"
-    v-on:upload-img="onUploadImg"
+    v-on:upload-img="onUploadImg;"
   ></editor>
 </template>

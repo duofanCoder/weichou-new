@@ -1,4 +1,5 @@
-import { Dto } from '@/model';
+import { Condition, Dto } from '@/model';
+
 import { request } from '../request';
 
 export function fetchQueryCampaignDetail(condition: Partial<Condition.Campaign>) {
