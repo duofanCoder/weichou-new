@@ -13,3 +13,7 @@ http://weichou.duofan.top
 
 本人blog网站 
 http://duofan.top
+
+毕业设计
+
+众筹网站
