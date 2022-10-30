@@ -7,7 +7,7 @@ frontend/.idea
 frontend/.vscode
 
 backend/HELP.md
-backend//target/
+backend/target/
 backend/!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
