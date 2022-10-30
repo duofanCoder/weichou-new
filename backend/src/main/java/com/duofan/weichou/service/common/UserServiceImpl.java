@@ -1,7 +1,10 @@
 package com.duofan.weichou.service.common;
 
+import com.duofan.weichou.controller.v1.condition.common.UserCondition;
 import com.duofan.weichou.controller.v1.request.common.ProfileRequest;
 import com.duofan.weichou.controller.v1.request.common.UserSignupRequest;
+import com.duofan.weichou.dto.model.common.PageDto;
+import com.duofan.weichou.exception.type.OwnerException;
 import com.duofan.weichou.model.common.User;
 import com.duofan.weichou.model.enums.UserRole;
 import com.duofan.weichou.dto.mapper.common.UserMapper;
@@ -9,15 +12,19 @@ import com.duofan.weichou.dto.model.common.UserDto;
 import com.duofan.weichou.repository.common.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.criteria.Predicate;
 
-import java.util.Date;
-import java.util.Optional;
+
+import java.util.*;
 
 
 @Service
@@ -85,5 +92,58 @@ public class UserServiceImpl implements UserService {
         userModel.setPassword(bCryptPasswordEncoder.encode(newPassword));
         return userMapper.toDto(userRepository.save(userModel));
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public PageDto<UserDto> findPageByCondition(UserCondition condition) {
+        LinkedList<UserDto> list = new LinkedList<>();
+        PageRequest pageable = PageRequest.of(condition.getPageNum(), condition.getPageSize(), Sort.by("createTime"));
+        Specification<User> spec = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (!condition.getName().isEmpty()) {
+                predicateList.add(criteriaBuilder.like(root.get("name").as(String.class), "%" + condition.getName() + "%"));
+            }
+            return criteriaQuery.where(predicateList.toArray(new Predicate[predicateList.size()])).getRestriction();
+        };
+        Page<User> modelPages = userRepository.findAll(spec, pageable);
+        for (User campaign : modelPages.getContent()) {
+            list.add(userMapper.toUserDto(campaign));
+        }
+        return new PageDto<UserDto>()
+                .setCurrentPage(pageable.getPageNumber())
+                .setTotalPage(modelPages.getTotalPages())
+                .setData(list);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByPrimaryKey(Long[] primaryKey) {
+        for (int i = 0; i < primaryKey.length; i++) {
+            userRepository.deleteById(primaryKey[i]);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public UserDto update(UserDto dto) {
+        User model = userRepository.findById(dto.getId()).orElseThrow(
+                () -> new OwnerException("修改的用户不存在！")
+        );
+
+
+        model.setId(dto.getId())
+                .setId(dto.getId())
+                .setMobile(dto.getMobile())
+                .setNickname(dto.getNickname())
+                .setUsername(dto.getUsername())
+                .setBilibili(dto.getBilibili())
+                .setWechat(dto.getWechat())
+                .setGender(dto.isGender())
+                .setUpdateTime(dto.getUpdateTime());
+
+        return modelMapper.map(userRepository.save(model), UserDto.class);
+    }
+
+
 
 }

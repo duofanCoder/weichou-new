@@ -1,5 +1,6 @@
 package com.duofan.weichou.controller.v1.api;
 
+import com.duofan.weichou.controller.v1.condition.common.UserCondition;
 import com.duofan.weichou.controller.v1.request.common.ProfileRequest;
 import com.duofan.weichou.controller.v1.request.common.UserSignupRequest;
 import com.duofan.weichou.dto.model.common.UserDto;
@@ -76,6 +77,13 @@ public class UserController {
         return Response.ok().setData(userService.findUserByUsername(auth.getName()));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("remove")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response remove(Long[] primaryKeys) {
+        userService.removeByPrimaryKey(primaryKeys);
+        return Response.ok();
+    }
 
     @PostMapping(value = "/profile")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
@@ -99,4 +107,20 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(null);
         return Response.ok();
     }
+
+
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("query")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response save(@RequestBody UserCondition condition) {
+        return Response.ok().setData(userService.findPageByCondition(condition));
+    }
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("update")
+    @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
+    public Response update(@RequestBody UserDto userRequest) {
+        return Response.ok().setData(userService.update(userRequest));
+    }
+
 }

@@ -56,6 +56,7 @@ export declare namespace Dto {
     avatar: string;
     birth: Date;
     mobile: string;
+    role: string;
   }
 
   interface CampaignIntro {

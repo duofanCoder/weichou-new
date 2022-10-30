@@ -11,7 +11,7 @@ export async function createPermissionGuard(
   const needLogin = Boolean(to.meta?.auth);
   const needAdmin = Boolean(to.meta?.admin);
   const userStore = useUserStore();
-  const isAdmin = false;
+  const isAdmin = userStore.userInfo.role == 'ADMIN';
   const isLogin = Boolean(getToken());
 
   // needLogin:true

@@ -40,4 +40,23 @@ public class UserMapper {
     public User toModel(UserDto userDto) {
         return modelMapper.map(userDto, User.class);
     }
+
+    public UserDto toUserDto(User user) {
+        if (user == null) {
+            return null;
+        }
+        return new UserDto()
+                .setId(user.getId())
+                .setMobile(user.getMobile())
+                .setNickname(user.getNickname())
+                .setUsername(user.getUsername())
+                .setBilibili(user.getBilibili())
+                .setWechat(user.getWechat())
+                .setGender(user.isGender())
+                .setPassword(user.getPassword())
+                .setCreateTime(user.getCreateTime())
+                .setUpdateTime(user.getUpdateTime())
+                .setRole(user.getRole());
+    }
+
 }
