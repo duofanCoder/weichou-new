@@ -12,8 +12,8 @@
 <table>
     <tr>
         <td><img src="./doc/imgs/home.png"/>主页</td>
-        <td><img src="./doc/imgs/home-mobile.png"/>主页 - 手机端适配</td>
-    </tr>
+        <td><img src="./doc/imgs/perk-info.png"/></td>
+   <tr>
     <tr>
         <td><img src="./doc/imgs/perk-start.png"/></td>
         <td><img src="./doc/imgs/perk-content.png"/></td>
@@ -32,8 +32,10 @@
     </tr>
 	<tr>
         <td><img src="./doc/imgs/perk-dev.png"/>项目进度更新</td>
-        <td><img src="./doc/imgs/perk-info.png"/></td>
     </tr>
+  <tr>
+   <td><img src="./doc/imgs/home-mobile.png"/>主页 - 手机端适配</td>
+  </tr>
 </table>
 
 ## 内置功能
@@ -47,7 +49,7 @@
 
 
 3. 开展活动
-该部分详细介绍了在系统中创建、管理和参与活动的功能。用户可以创建新的活动，设置日期和地点等详细信息，邀请其他人，并管理活动的整体流程。
+该部分详细介绍了在系统中创建、管理和参与活动的功能。用户可以创建新的活动，设置日期和地点等详细信息，邀请其他人，并管理活动的整体流程。发布后的活动，发布者可以更新活动的紧张状态。
 
 
 4. 活动检索
