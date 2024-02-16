@@ -10,7 +10,6 @@ import com.duofan.weichou.model.business.CampaignDetail;
 import com.duofan.weichou.model.business.Perk;
 import com.duofan.weichou.repository.business.CampaignDetailRepository;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.sun.javafx.geom.PickRay;
 import org.aspectj.weaver.ast.Var;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
